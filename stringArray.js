@@ -52,7 +52,7 @@ Array.prototype.parseString = function(){
         
 
     }
-    return ("[" + nStr + "]");
+    return (`[${nStr}]`);
 };
 const settingsArray = ["rgba(1,2,255,0.7)", `two`, true, false, 'true', 5e90, 70.8];
 
