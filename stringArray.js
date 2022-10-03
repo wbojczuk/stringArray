@@ -21,11 +21,7 @@ String.prototype.parseArray = function() {
         
          loopAmt = nArr.length;
         for(let i = 0; i < loopAmt; i++){
-            if(!/^[,'`"]*[ ]*[^'`",\s]/gi.test(nArr[i])){
-                nArr.splice(i,1);
-                i = 0;
-                loopAmt = nArr.length;
-            }else if(nArr[i] == null){
+            if((!/^[,'`"]*[ ]*[^'`",\s]/gi.test(nArr[i]))||(nArr[i] == null)){
                 nArr.splice(i,1);
                 i--;
                 loopAmt--;
