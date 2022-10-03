@@ -27,7 +27,7 @@ String.prototype.parseArray = function() {
                 loopAmt = nArr.length;
             }else if(nArr[i] == null){
                 nArr.splice(i,1);
-                i=0;
+                i--;
                 loopAmt--;
             }
         }
