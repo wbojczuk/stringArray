@@ -3,7 +3,7 @@ String.prototype.parseArray = function() {
     if(/((?<=\[).*(?=\])|(.{1,}))/.test(str)){
     const arrayRegEx = /(((?<!\[).*(?<=\[))[^\]\[]*((?=\]).*(?!\]))|.{1,})/;
     const match = str.match(arrayRegEx)[0];
-    const nArr = match.split(/([\de+]*\.[\de+]*|[\de+]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`)(?=[,]*)|(?<=[,]*[ ]*)([\de]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`|true|false)/gi);
+    const nArr = match.split(/([-\de+]*\.[-\de+]*|[-\de+]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`)(?=[,]*)|(?<=[,]*[ ]*)([\de]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`|true|false)/gi);
     nArr.splice(0,1);
     nArr.splice(nArr.length - 1, 1);
     let loopAmt = nArr.length;
