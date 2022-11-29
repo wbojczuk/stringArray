@@ -15,39 +15,23 @@ String.prototype.parseArray = function() {
             nArr[i] = parseFloat(nArr[i]);
         } else if(/true|false/gi.test(nArr[i])){
             nArr[i] = ((`${nArr[i]}`).toLowerCase() == "true") ? true : false;
-        }else if(/undefined/gi.test(nArr[i])){
-            nArr[i] = undefined;
-        }else if(/null/gi.test(nArr[i])){
-            nArr[i] = null;
         }
     }
         // FILTER
          loopAmt = nArr.length;
         for(let i = 0; i < loopAmt; i++){
-            if((!/^[,'`"]*[ ]*[^'`",\s]/gi.test(nArr[i]))||(nArr[i] == null)){
+            if((!/^[,'`"]*[ ]*[^'`",\s]/gi.test(nArr[i]))||(nArr[i] == undefined)){
                 nArr.splice(i,1);
                 i--;
                 loopAmt--;
+            }else if(/undefined/gi.test(nArr[i])){
+                nArr[i] = undefined;
+            }else if(/null/gi.test(nArr[i])){
+                nArr[i] = null;
             }
         }
     return nArr;
     } else{
         console.log("parseArray Error: No Array Detected");
     }
-};
-
-Array.prototype.parseString = function(){
-    const arrLength = this.length;
-    let nStr = "";
-    for(let i = 0; i < arrLength; i++){
-        if(typeof this[i] == "string"){
-            this[i] = "\`" + this[i] + "\`";
-        }
-        if(i == arrLength - 1){
-            nStr += this[i];
-        }else{
-            nStr += `${this[i]}, `;
-        }
-    }
-    return (`[${nStr}]`);
 };
