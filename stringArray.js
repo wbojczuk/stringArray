@@ -3,7 +3,7 @@ String.prototype.parseArray = function() {
     if(/((?<=\[).*(?=\])|(.{1,}))/.test(str)){
     const arrayRegEx = /(((?<!\[).*(?<=\[))[^\]\[]*((?=\]).*(?!\]))|.{1,})/;
     const match = str.match(arrayRegEx)[0];
-    const nArr = match.split(/([-\de+]*\.[-\de+]*|[-\de+]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`)(?=[,]*)|(?<=[,]*[ ]*)([\de]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`|true|false)/gi);
+    const nArr = match.split(/([-\de+]*\.[-\de+]*|[-\de+]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`)(?=[,]*)|(?<=[,]*[ ]*)([\de]{1,}|"[^"]{1,}"|'[^']{1,}'|`[^`]{1,}`|true|false|undefined|null)/gi);
     nArr.splice(0,1);
     nArr.splice(nArr.length - 1, 1);
     let loopAmt = nArr.length;
@@ -15,10 +15,13 @@ String.prototype.parseArray = function() {
             nArr[i] = parseFloat(nArr[i]);
         } else if(/true|false/gi.test(nArr[i])){
             nArr[i] = ((`${nArr[i]}`).toLowerCase() == "true") ? true : false;
+        }else if(/undefined/gi.test(nArr[i])){
+            nArr[i] = undefined;
+        }else if(/null/gi.test(nArr[i])){
+            nArr[i] = null;
         }
     }
         // FILTER
-        
          loopAmt = nArr.length;
         for(let i = 0; i < loopAmt; i++){
             if((!/^[,'`"]*[ ]*[^'`",\s]/gi.test(nArr[i]))||(nArr[i] == null)){
@@ -27,7 +30,6 @@ String.prototype.parseArray = function() {
                 loopAmt--;
             }
         }
-    
     return nArr;
     } else{
         console.log("parseArray Error: No Array Detected");
@@ -38,19 +40,14 @@ Array.prototype.parseString = function(){
     const arrLength = this.length;
     let nStr = "";
     for(let i = 0; i < arrLength; i++){
-
         if(typeof this[i] == "string"){
             this[i] = "\`" + this[i] + "\`";
         }
-        
-
         if(i == arrLength - 1){
             nStr += this[i];
         }else{
             nStr += `${this[i]}, `;
         }
-        
-
     }
     return (`[${nStr}]`);
 };
