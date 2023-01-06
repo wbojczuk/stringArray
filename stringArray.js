@@ -1,3 +1,12 @@
+/*
+ Program: stringArray.js
+ Version: 1.1 
+ Creator: William Bojczuk (wiliambojczuk@gmail.com)
+ License: BSD
+ Github: https://github.com/wbojczuk
+ Website: https://williambojczuk.com
+ 
+ */
 String.prototype.parseArray = function() {
     const str = this;
     if(/((?<=\[).*(?=\])|(.{1,}))/.test(str)){
