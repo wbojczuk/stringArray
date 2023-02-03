@@ -44,3 +44,20 @@ String.prototype.parseArray = function() {
         console.log("parseArray Error: No Array Detected");
     }
 };
+
+//Parses an array object into a string that is readable by String.parseArray();
+Array.prototype.parseString = function(){
+    const arrLength = this.length;
+    let nStr = "";
+    for(let i = 0; i < arrLength; i++){
+        if(typeof this[i] == "string"){
+            this[i] = "\`" + this[i] + "\`";
+        }
+        if(i == arrLength - 1){
+            nStr += this[i];
+        }else{
+            nStr += `${this[i]}, `;
+        }  
+    }
+    return (`[${nStr}]`);
+};
